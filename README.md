@@ -1,8 +1,7 @@
  Java agent plugin extensions for Apache SkyWalking
 
 
-Including
-
+Including:
 1.db2-9.7.x
 2.db2-10.1.x
 3.db2-10.5.x
