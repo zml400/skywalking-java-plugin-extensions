@@ -1,12 +1,9 @@
-# Java agent plugin extensions for Apache SkyWalking
-Due to license incompatibilities/restrictions, some plugins are hosted in here.
+ Java agent plugin extensions for Apache SkyWalking
 
 Including
-1. Resin 3
-1. Resin 4
-1. Oracle JDBC Driver
-
-To be clear, these plugins have no license issue, but need Apache 2.0 uncompatible license Jar file to compile, which is not allowed to do in Apache. 
-
-# License
-Apache 2.0
+1.db2-9.7.x
+2.db2-10.1.x
+3.db2-10.5.x
+4.db2-11.1.x
+5.Oracle10.x
+6.sqlserver-8.1.0-plugin
