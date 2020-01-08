@@ -1,0 +1,5 @@
+sqlserver-8.1.0=io.skywalking.apm.plugin.jdbc.sqlserver.define.DriverInstrumentation
+sqlserver-8.1.0=io.skywalking.apm.plugin.jdbc.sqlserver.define.ConnectionInstrumentation
+sqlserver-8.1.0=io.skywalking.apm.plugin.jdbc.sqlserver.define.SQLServerCallableInstrumentation
+sqlserver-8.1.0=io.skywalking.apm.plugin.jdbc.sqlserver.define.SQLServerPrepareStatementInstrumentation
+sqlserver-8.1.0=io.skywalking.apm.plugin.jdbc.sqlserver.define.SQLServerStatementInstrumentation

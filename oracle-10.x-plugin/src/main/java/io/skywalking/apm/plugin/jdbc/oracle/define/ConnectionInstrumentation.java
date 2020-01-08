@@ -44,16 +44,18 @@ import static net.bytebuddy.matcher.ElementMatchers.takesArguments;
 public class ConnectionInstrumentation extends ClassInstanceMethodsEnhancePluginDefine {
 
     public static final String ENHANCE_CLASS = "oracle.jdbc.driver.PhysicalConnection";
+    public static final String T4C_CONNECTION_CLASS = "oracle.jdbc.driver.T4CConnection";
+
     public static final String PREPARED_STATEMENT_INTERCEPT_CLASS = "io.skywalking.apm.plugin.jdbc.oracle.CreatePreparedStatementInterceptor";
     public static final String CALLABLE_INTERCEPT_CLASS = "io.skywalking.apm.plugin.jdbc.oracle.CreateCallableInterceptor";
     public static final String CREATE_STATEMENT_INTERCEPT_CLASS = "io.skywalking.apm.plugin.jdbc.oracle.CreateStatementInterceptor";
-    public static final String T4C_CONNECTION_CLASS = "oracle.jdbc.driver.T4CConnection";
 
-    @Override protected ConstructorInterceptPoint[] getConstructorsInterceptPoints() {
+
+    @Override public ConstructorInterceptPoint[] getConstructorsInterceptPoints() {
         return new ConstructorInterceptPoint[0];
     }
 
-    @Override protected InstanceMethodsInterceptPoint[] getInstanceMethodsInterceptPoints() {
+    @Override public InstanceMethodsInterceptPoint[] getInstanceMethodsInterceptPoints() {
         return new InstanceMethodsInterceptPoint[] {
             new InstanceMethodsInterceptPoint() {
                 @Override public ElementMatcher<MethodDescription> getMethodsMatcher() {

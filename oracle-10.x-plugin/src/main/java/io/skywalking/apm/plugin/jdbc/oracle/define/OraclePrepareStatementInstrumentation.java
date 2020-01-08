@@ -18,6 +18,7 @@
 
 package io.skywalking.apm.plugin.jdbc.oracle.define;
 
+import io.skywalking.apm.plugin.jdbc.oracle.Constants;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import org.apache.skywalking.apm.agent.core.plugin.interceptor.ConstructorInterceptPoint;
@@ -36,12 +37,12 @@ public class OraclePrepareStatementInstrumentation extends ClassInstanceMethodsE
     public static final String T4C_PREPARED_STATEMENT_CLASS = "oracle.jdbc.driver.T4CPreparedStatement";
 
     @Override
-    protected ConstructorInterceptPoint[] getConstructorsInterceptPoints() {
+    public ConstructorInterceptPoint[] getConstructorsInterceptPoints() {
         return new ConstructorInterceptPoint[0];
     }
 
     @Override
-    protected InstanceMethodsInterceptPoint[] getInstanceMethodsInterceptPoints() {
+    public InstanceMethodsInterceptPoint[] getInstanceMethodsInterceptPoints() {
         return new InstanceMethodsInterceptPoint[]{
                 new InstanceMethodsInterceptPoint() {
                     @Override
@@ -57,6 +58,38 @@ public class OraclePrepareStatementInstrumentation extends ClassInstanceMethodsE
                         return PREPARED_STATEMENT_INTERCEPT_CLASS;
                     }
 
+                    @Override
+                    public boolean isOverrideArgs() {
+                        return false;
+                    }
+                },
+                new InstanceMethodsInterceptPoint() {
+                    @Override
+                    public ElementMatcher<MethodDescription> getMethodsMatcher() {
+                        return named("setNull").or(named("setNullCritical"))
+                                .or(named("setBoolean")).or(named("setBooleanInternal"))
+                                .or(named("setByte")).or(named("setByteInternal"))
+                                .or(named("setShort")).or(named("setShortInternal"))
+                                .or(named("setInt")).or(named("setIntInternal"))
+                                .or(named("setLong")).or(named("setLongInternal"))
+                                .or(named("setFloat")).or(named("setFloatInternal"))
+                                .or(named("setBinaryFloat")).or(named("setBinaryFloatInternal"))
+                                .or(named("setDouble")).or(named("setDoubleInternal"))
+                                .or(named("setBinaryDouble")).or(named("setBinaryDoubleInternal"))
+                                .or(named("setBigDecimal")).or(named("setBigDecimalInternal"))
+                                .or(named("setString")).or(named("setStringInternal"))
+                                .or(named("setBytes")).or(named("setBytesInternal"))
+                                .or(named("setCHAR")).or(named("setCHARInternal"))
+                                .or(named("setFixedCHAR")).or(named("setFixedCHARInternal"))
+                                .or(named("setDate")).or(named("setDateInternal"))
+                                .or(named("setTime")).or(named("setTimeInternal"))
+                                .or(named("setTimestamp")).or(named("setTimestampInternal"))
+                                .or(named("setObject")).or(named("setObjectInternal"));
+                    }
+                    @Override
+                    public String getMethodsInterceptor() {
+                        return Constants.PREPARED_STATEMENT_SET_PARAMS_INTERCEPT_CLASS;
+                    }
                     @Override
                     public boolean isOverrideArgs() {
                         return false;

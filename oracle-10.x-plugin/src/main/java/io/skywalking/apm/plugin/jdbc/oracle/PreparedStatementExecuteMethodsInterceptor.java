@@ -19,6 +19,8 @@
 package io.skywalking.apm.plugin.jdbc.oracle;
 
 import java.lang.reflect.Method;
+
+import io.skywalking.apm.plugin.jdbc.oracle.utils.SqlUtil;
 import org.apache.skywalking.apm.agent.core.context.ContextManager;
 import org.apache.skywalking.apm.agent.core.context.tag.Tags;
 import org.apache.skywalking.apm.agent.core.context.trace.AbstractSpan;
@@ -45,7 +47,17 @@ public class PreparedStatementExecuteMethodsInterceptor implements InstanceMetho
             AbstractSpan span = ContextManager.createExitSpan(buildOperationName(connectInfo, method.getName(), cacheObject.getStatementName()), connectInfo.getDatabasePeer());
             Tags.DB_TYPE.set(span, "sql");
             Tags.DB_INSTANCE.set(span, connectInfo.getDatabaseName());
-            Tags.DB_STATEMENT.set(span, cacheObject.getSql());
+            String sql = "";
+            if(!cacheObject.getSql().isEmpty()){
+                sql= SqlUtil.PrepareSqlTransfer(cacheObject.getSql(),cacheObject.getParameters());
+            }else {
+                if(allArguments.length>0){
+                    sql=(String)allArguments[0];
+                }else{
+                    sql="sql not found!";
+                }
+            }
+            Tags.DB_STATEMENT.set(span, sql);
             span.setComponent(connectInfo.getComponent());
             SpanLayer.asDB(span);
         }

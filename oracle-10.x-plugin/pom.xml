@@ -26,6 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>apm-oracle-10.x-plugin</artifactId>
+    <version>6.4.0</version>
     <packaging>jar</packaging>
 
     <name>oracle-10.x-plugin</name>
@@ -33,14 +34,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
+        <skywalking.version>6.4.0</skywalking.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>${ojdbc14.version}</version>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
